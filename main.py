@@ -22,7 +22,7 @@ st.write (" ")
 st.write (" ")
 st.write (" ")
 
-data=pd.read_csv("compleanni.csv",error_bad_lines=False)
+data=pd.read_csv("list.csv",error_bad_lines=False)
 today = date.today().strftime("%d") + "/" + date.today().strftime("%m")
 today_date = datetime.strptime(today, '%d/%m')
 
