@@ -46,11 +46,12 @@ mypass = "gnappy"
 def mysidebar(mypass):
     st.sidebar.header("Seleziona la modalita`")
     mode = st.sidebar.radio("",("User","Admin"))
-    st.sidebar.write("_In modalita **ADMIN** inserendo la password si ha la possibilita di inserire,modificare o eliminare un record._")
+    st.sidebar.write("""_In modalita\` **ADMIN** inserendo la password si ha la possibilita\` di inserire,modificare o eliminare un record._""")
     if mode == "Admin":
         pwd = st.sidebar.text_input("Inserisci Password",type="password")
         if pwd == mypass:
             admin_mode = True
+            st.sidebar.success("Modalita` admin abilitata")
         elif pwd == "":
             admin_mode = False
         else:
