@@ -10,6 +10,7 @@ import pandas as pd
 import time
 from datetime import date 
 from datetime import datetime 
+from passlib.hash import pbkdf2_sha256 as pw
 
 st.set_page_config(page_title='birthday', page_icon=':boom:', initial_sidebar_state='collapsed')
 
@@ -42,14 +43,14 @@ def compute_birth(df):
         elif diff == next_day : next_list.append(nome)
     return today_list,next_list,next_day
 
-mypass = "gnappy"
-def mysidebar(mypass):
+myhash = '$pbkdf2-sha256$29000$/5.zFgKA0Nrbm5PyPqf0Pg$RcLiratElAGQ2SG.1SpBkwBgyuENNSFUeJf2rgdEg48'
+def mysidebar(myhash):
     st.sidebar.header("Seleziona la modalita`")
     mode = st.sidebar.radio("",("User","Admin"))
     st.sidebar.write("""_In modalita\` **ADMIN** inserendo la password si ha la possibilita\` di inserire,modificare o eliminare un record._""")
     if mode == "Admin":
         pwd = st.sidebar.text_input("Inserisci Password",type="password")
-        if pwd == mypass:
+        if pw.verify(pwd,myhash):
             admin_mode = True
             st.sidebar.success("Modalita` admin abilitata")
         elif pwd == "":
@@ -81,7 +82,7 @@ def remove_compl(data,nome,myfile="list.csv"):
 st.markdown(""" # """+ text_colored("CornflowerBlue", ":tada: Oggi festeggiamo ..."),unsafe_allow_html=True)
 empty_line(1,True)
 
-admin_mode = mysidebar(mypass)
+admin_mode = mysidebar(myhash)
 data=pd.read_csv("list.csv",error_bad_lines=False)
 
 if admin_mode:

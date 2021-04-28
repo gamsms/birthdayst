@@ -1,3 +1,4 @@
 pandas>=1.2.3
 streamlit>=0.78.0
 numpy>=1.20.1
+passlib>=1.7.4
